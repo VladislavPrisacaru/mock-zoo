@@ -1,9 +1,11 @@
-// LogIn.qml
+// Booking.qml
 
-import QtQuick 2.15
-import QtQuick.Controls 2.15
-import QtQuick.Layouts 2.15
-import QtQuick.Controls.Material 2.15
+import QtQuick 
+import QtQuick.Controls
+import QtQuick.Controls.Calendar
+import QtQuick.Dialogs 
+import QtQuick.Layouts 
+import QtQuick.Controls.Material 
 import "Components" as UI
 
 Item {
@@ -14,8 +16,36 @@ Item {
 
     UI.FormFrame {
         anchors.centerIn: parent
-        
-        Label { text: "Label" }
 
-   }
+        
+        Label { text: "Choose your tour date" }
+
+        TextField {
+    id: dateField
+    readOnly: true
+    placeholderText: "Select tour date"
+
+    TapHandler {
+        onTapped: popup.open()
+    }
+}
+
+Popup {
+    id: popup
+    modal: true
+    focus: true
+    anchors.centerIn: parent
+    width: 320
+    height: 300
+
+    Calendar {
+        anchors.fill: parent
+
+        onClicked: function(date) {
+            dateField.text = Qt.formatDate(date, "dd MMM yyyy")
+            popup.close()
+        }
+    }
+}
+    }
 }

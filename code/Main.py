@@ -2,6 +2,7 @@ import sys
 from PySide6.QtWidgets import QApplication
 from PySide6.QtQml import QQmlApplicationEngine
 from PySide6.QtQuickControls2 import QQuickStyle
+import PySide6
 from Database import DatabaseManager as db 
 from Logic import Backend
 
@@ -13,10 +14,12 @@ QQuickStyle.setStyle("Material")
 db = db("AppDB.db")
 backend = Backend(db)
 
+print(PySide6.__version__)
+
 # expose classes to the ui engine 
 engine.rootContext().setContextProperty("backend", backend)
 
-engine.load("QMLLogIn/Main.qml")
+engine.load("code/Main.qml")
 
 if not engine.rootObjects():
     sys.exit(-1)
