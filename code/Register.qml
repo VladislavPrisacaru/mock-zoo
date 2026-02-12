@@ -13,57 +13,40 @@ Item {
 
     property string errorMessage: ""
 
-    ColumnLayout {
+    UI.FormFrame {
         anchors.centerIn: parent
 
-        Frame {
-            Layout.fillWidth: true
+        Label {
+            text: errorMessage
+            color: "red"
+            visible: errorMessage !== ""
+            font.pixelSize: 13 * uiScale
+        }
 
-            Material.elevation: 3
-            padding: 30
-            topPadding: 30
-            bottomPadding: 30
+        Label { text: "Register"; font.pixelSize: 13 * uiScale }
 
-            Material.roundedScale: Material.LargeScale
+        UI.InputRow { id: usernameRow; labelText: "Username"}
+        UI.InputRow { id: emailRow; labelText: "Email:" }
+        UI.InputRow { id: passwordRow; labelText: "Password:"; isPassword: true }
+        UI.InputRow { id: confirmRow; labelText: "Confirm Password:"; isPassword: true }
 
-            ColumnLayout {
+        Item {Layout.fillHeight: true}
+        
+        RowLayout { 
 
-                Layout.fillWidth: true
-                spacing: 15
+            spacing: 30
 
-                Label {
-                    text: errorMessage
-                    color: "red"
-                    visible: errorMessage !== ""
-                    font.pixelSize: 13 * uiScale
-                }
+            UI.AppButton { 
+                btnText: "Back" 
+                Layout.fillWidth: true 
+                onClicked: goToLogin()
+            } 
 
-                Label { text: "Register"; font.pixelSize: 13 * uiScale }
-
-                UI.InputRow { id: usernameRow; labelText: "Username"}
-                UI.InputRow { id: emailRow; labelText: "Email:" }
-                UI.InputRow { id: passwordRow; labelText: "Password:"; isPassword: true }
-                UI.InputRow { id: confirmRow; labelText: "Confirm Password:"; isPassword: true }
-
-                Item {Layout.fillHeight: true}
-                
-                RowLayout { 
-
-                    spacing: 30
-
-                    UI.AppButton { 
-                        btnText: "Back" 
-                        Layout.fillWidth: true 
-                        onClicked: goToLogin()
-                    } 
-
-                    UI.AppButton { 
-                        btnText: "Register" 
-                        Layout.fillWidth: true 
-                        onClicked: handleRegister()
-                    } 
-                }
-            }
+            UI.AppButton { 
+                btnText: "Register" 
+                Layout.fillWidth: true 
+                onClicked: handleRegister()
+            } 
         }
     }
 

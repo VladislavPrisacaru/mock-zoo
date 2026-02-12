@@ -10,6 +10,7 @@ Item {
     signal goToRegister()
     signal goToLogin()
     signal goToProfile()
+    signal goToBooking()
     signal goHome()
 
     height: parent.height * 0.1
@@ -34,7 +35,7 @@ Item {
                 Layout.alignment: Qt.AlignVCenter
                 source: "Images/RAZLogoWhite.png"
                 Layout.preferredHeight: 130
-                Layout.preferredWidth: 90
+                Layout.preferredWidth: 85
             }
 
             Item { Layout.fillWidth: true}
@@ -48,6 +49,7 @@ Item {
             UI.AppButton {
                 btnText: "Bookings"
                 font.pixelSize: mainWindow.fontMedium
+                onClicked: goToBooking()
             }
 
             UI.AppButton {

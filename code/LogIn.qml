@@ -14,64 +14,47 @@ Item {
 
     property string errorMessage: ""
 
-    ColumnLayout {
+    UI.FormFrame {
         anchors.centerIn: parent
-
-        Frame {
-
-            Layout.fillWidth: true
-
-            Material.elevation: 3
-            padding: 30
-            topPadding: 30
-            bottomPadding: 30
-            Material.roundedScale: Material.LargeScale
-
-
-            ColumnLayout {
-
-                Layout.fillWidth: true
-                spacing: 15
                 
-                Label {
-                    text: errorMessage
-                    color: "red"
-                    visible: errorMessage !== ""
-                    font.pixelSize: 13 * uiScale
+        Label {
+            text: errorMessage
+            color: "red"
+            visible: errorMessage !== ""
+            font.pixelSize: 13 * uiScale
+        }
+
+        Label { text: "Log In"; font.pixelSize: 13 * uiScale }
+
+        UI.InputRow { id: emailRow; labelText: "Email:" }
+        UI.InputRow { id: passwordRow; labelText: "Password:"; isPassword: true }
+
+        Item {Layout.fillHeight: true}
+
+        RowLayout {
+
+            spacing: 30
+
+            UI.AppButton {
+
+                btnText: "Register"
+                Layout.fillWidth: true
+                onClicked: {
+                    goToRegister()
+                    clearFields()
                 }
+            }
 
-                Label { text: "Log In"; font.pixelSize: 13 * uiScale }
+            UI.AppButton {
 
-                UI.InputRow { id: emailRow; labelText: "Email:" }
-                UI.InputRow { id: passwordRow; labelText: "Password:"; isPassword: true }
-
-                Item {Layout.fillHeight: true}
-
-                RowLayout {
-
-                    spacing: 30
-
-                    UI.AppButton {
-
-                        btnText: "Register"
-                        Layout.fillWidth: true
-                        onClicked: {
-                            goToRegister()
-                            clearFields()
-                        }
-                    }
-
-                    UI.AppButton {
-
-                        btnText: "Log In"
-                        Layout.fillWidth: true
-                        onClicked: handleLogin()
-                        
-                    }
-                }
+                btnText: "Log In"
+                Layout.fillWidth: true
+                onClicked: handleLogin()
+                
             }
         }
     }
+    
 
     function handleLogin() {
         try {
@@ -101,4 +84,5 @@ Item {
         emailRow.inputText = "" 
         passwordRow.inputText = ""
     }
+    
 }

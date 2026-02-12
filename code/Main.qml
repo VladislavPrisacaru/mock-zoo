@@ -54,6 +54,10 @@ ApplicationWindow {
             function onGoHome () {
                 stack.pop(null)                
             }
+
+            function onGoToBooking() {
+                stack.push(Qt.resolvedUrl("Booking.qml"))
+            }
         }
 
         Connections {
