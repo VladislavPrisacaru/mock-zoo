@@ -16,6 +16,10 @@ backend = Backend(db)
 
 print(PySide6.__version__)
 
+from PySide6.QtCore import qVersion, QLibraryInfo
+print("Qt version:", qVersion())
+print("QML path:", QLibraryInfo.path(QLibraryInfo.QmlImportsPath))
+
 # expose classes to the ui engine 
 engine.rootContext().setContextProperty("backend", backend)
 
