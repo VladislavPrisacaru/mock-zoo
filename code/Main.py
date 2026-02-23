@@ -23,7 +23,7 @@ print("QML path:", QLibraryInfo.path(QLibraryInfo.QmlImportsPath))
 # expose classes to the ui engine 
 engine.rootContext().setContextProperty("backend", backend)
 
-engine.load("code/Main.qml")
+engine.load("Main.qml")
 
 if not engine.rootObjects():
     sys.exit(-1)
