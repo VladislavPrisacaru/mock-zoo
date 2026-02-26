@@ -13,7 +13,7 @@ class DatabaseManager:
     def createTables(self):
         self.cursor.execute("""
             CREATE TABLE IF NOT EXISTS users (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                userId INTEGER PRIMARY KEY AUTOINCREMENT,
                 username TEXT NOT NULL UNIQUE,
                 email TEXT NOT NULL UNIQUE,
                 passwordHash BLOB NOT NULL
@@ -45,13 +45,13 @@ class DatabaseManager:
         return False
     
     def getUserDetails(self, email):
-        self.cursor.execute( "SELECT id, username, email FROM users WHERE email = ?", (email,))
+        self.cursor.execute( "SELECT userId, username, email FROM users WHERE email = ?", (email,))
         row = self.cursor.fetchone()
 
         if row is None: 
             return False 
         
-        return { "id": row[0], "username": row[1], "email": row[2]}
+        return { "userId": row[0], "username": row[1], "email": row[2]}
     
     def hashPassword(self, password): 
         return bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt()) 
