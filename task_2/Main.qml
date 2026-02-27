@@ -56,7 +56,12 @@ ApplicationWindow {
             }
 
             function onGoToBooking() {
-                stack.push(Qt.resolvedUrl("Booking.qml"))
+                if (backend.loggedIn) {
+                    stack.push(Qt.resolvedUrl("Booking.qml"))
+                }
+                else {
+                    stack.push(Qt.resolvedUrl("LogIn.qml"))
+                }
             }
         }
 
@@ -79,7 +84,6 @@ ApplicationWindow {
             function onGoHome () {
                 stack.pop(null)                
             }
-
         }
     }
 }

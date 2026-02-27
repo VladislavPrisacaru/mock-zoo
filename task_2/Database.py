@@ -13,12 +13,27 @@ class DatabaseManager:
     def createTables(self):
         self.cursor.execute("""
             CREATE TABLE IF NOT EXISTS users (
-                userId INTEGER PRIMARY KEY AUTOINCREMENT,
+                userID INTEGER PRIMARY KEY AUTOINCREMENT,
                 username TEXT NOT NULL UNIQUE,
                 email TEXT NOT NULL UNIQUE,
                 passwordHash BLOB NOT NULL
-            );             
+            );
         """)
+
+        self.cursor.execute("""
+            CREATE TABLE IF NOT EXISTS bookings (
+                bookingID INTEGER PRIMARY KEY AUTOINCREMENT,
+                userID INTEGER NOT NULL,
+                tourDatetime TEXT NOT NULL,
+                adults INTEGER NOT NULL,
+                children INTEGER NOT NULL,
+                hotel INTEGER NOT NULL,
+                rooms INTEGER,
+                nights INTEGER,
+                FOREIGN KEY (userID) REFERENCES users(userID) ON DELETE CASCADE
+            );
+        """)
+
         self.connection.commit()
     
     def createUser(self, username, email, password): 
@@ -45,13 +60,16 @@ class DatabaseManager:
         return False
     
     def getUserDetails(self, email):
-        self.cursor.execute( "SELECT userId, username, email FROM users WHERE email = ?", (email,))
+        self.cursor.execute( "SELECT userID, username, email FROM users WHERE email = ?", (email,))
         row = self.cursor.fetchone()
 
         if row is None: 
             return False 
         
-        return { "userId": row[0], "username": row[1], "email": row[2]}
+        return { "userID": row[0], "username": row[1], "email": row[2]}
+    
+    def addNewBooking(self, userID, tourDatetime, adults, children, hotel, rooms, nights):
+        self.cursor.execute("INSERT INTO bookings (userID, tourDatetime, adults, children, hotel, rooms, nights) VALUES (?, ?, ?, ?, ?, ?, ?)""")
     
     def hashPassword(self, password): 
         return bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt()) 

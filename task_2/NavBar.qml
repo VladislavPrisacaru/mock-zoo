@@ -34,8 +34,8 @@ Item {
                 Layout.fillHeight: true  
                 Layout.alignment: Qt.AlignVCenter
                 source: "Images/RAZLogoWhite.png"
-                Layout.preferredHeight: 130
-                Layout.preferredWidth: 85
+                Layout.preferredHeight: parent.height * 0.8
+                Layout.preferredWidth: parent.width * 0.035
             }
 
             Item { Layout.fillWidth: true}

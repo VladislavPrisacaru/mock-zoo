@@ -11,6 +11,7 @@ Item {
     signal goToRegister()
     signal goToLogin()
     signal goToProfile()
+    signal goHome()
 
     property string errorMessage: ""
 
@@ -66,7 +67,7 @@ Item {
 
             if (backend.logIn(emailRow.inputText, passwordRow.inputText)) {
                 console.log("going profile")
-                goToProfile()
+                goHome()
                 errorMessage = ""
                 clearFields()
 
