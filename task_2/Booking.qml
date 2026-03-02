@@ -13,11 +13,19 @@ Item {
     signal goToProfile()
     signal goHome()
 
+    property string errorMessage: ""
+    property date selectedDate
+
     UI.FormFrame {
-        property date selectedDate
+       
         anchors.centerIn: parent
 
-
+        Label {
+            text: errorMessage
+            color: "red"
+            visible: errorMessage !== ""
+            font.pixelSize: 13 * uiScale
+        }
         
         Label { text: "Choose your tour date"; font.pixelSize: 13 * uiScale; Layout.fillWidth: true }
 
@@ -119,12 +127,12 @@ Item {
             id: numRooms
             Layout.fillWidth: true
 
-            model: ["0","1","2","3","4","5"]
+            model: ["1","2","3","4","5"]
             visible: yesHotel.checked
         }
 
         Label { 
-            text: "Choose number of rooms"; 
+            text: "Choose number of nights"; 
             font.pixelSize: 13 * uiScale; 
             Layout.fillWidth: true 
             visible: yesHotel.checked
@@ -134,7 +142,7 @@ Item {
             id: numNights
             Layout.fillWidth: true
 
-            model: ["0","1","2","3","4","5"]
+            model: ["1","2","3","4","5"]
             visible: yesHotel.checked
         }
 
@@ -151,8 +159,35 @@ Item {
             UI.AppButton {
                 Layout.fillWidth: true 
                 text: "Confirm"
+                onClicked: submitForm()
                 
             }
+        }
+    }
+
+    function submitForm() {
+        if (!dateInput.acceptableInput) {
+            errorMessage = "Enter a valid tour date"
+            console.log("date invalid")
+            return
+        }
+
+        else {
+            var hours = earlyTime.checked ? 11 : 14;
+
+            selectedDate.setHours(hours)
+            selectedDate.setMinutes(0)
+            selectedDate.setSeconds(0)
+
+            var isoString = selectedDate.toISOString().slice(0, 19).replace("T", " ")
+
+            var hotelChecked = yesHotel.checked ? 1 : 0
+
+            console.log("attempting booking")
+
+            backend.addBooking(backend.currentUserID, isoString, parseInt(adults.currentText), parseInt(children.currentText), hotelChecked, parseInt(numRooms.currentText), parseInt(numNights.currentText))
+            console.log("booking succesfull")
+            goHome()
         }
     }
 }

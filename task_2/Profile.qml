@@ -35,6 +35,27 @@ Item {
                 Label { text: "username: " + backend.username; font.pixelSize: 13 * uiScale }
                 Label { text: "email: " + backend.email; font.pixelSize: 13 * uiScale }
 
+                Component.onCompleted: {
+                    console.log("BOOKINGS:", JSON.stringify(backend.getBookingInfo()))
+                }
+
+                ListView {
+                    width: parent.width
+                    height: 200
+                    Connections {
+                        target: backend
+                        function onBookingsChanged() {
+                            model = backend.getBookingInfo()
+                        }
+                    }
+
+                    delegate: Text {
+                        text: tourDatetime + " | Adults: " + adults + " | Children: " + children + " | Hotel: " + hotel + " | Rooms: " + rooms + " | Nights: " + nights
+                    }
+                }
+
+
+
                 UI.AppButton {
                     btnText: "Log Out"
                     onClicked: {

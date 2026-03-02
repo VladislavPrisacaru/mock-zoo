@@ -69,7 +69,38 @@ class DatabaseManager:
         return { "userID": row[0], "username": row[1], "email": row[2]}
     
     def addNewBooking(self, userID, tourDatetime, adults, children, hotel, rooms, nights):
-        self.cursor.execute("INSERT INTO bookings (userID, tourDatetime, adults, children, hotel, rooms, nights) VALUES (?, ?, ?, ?, ?, ?, ?)""")
+        if not hotel:
+            rooms = None
+            nights = None
+
+        try:   
+            self.cursor.execute("""INSERT INTO bookings (userID, tourDatetime, adults, children, hotel, rooms, nights) 
+                                VALUES (?, ?, ?, ?, ?, ?, ?)""", 
+                                (userID, tourDatetime, adults, children, hotel, rooms, nights))
+            self.connection.commit()
+            print("booking saved to the db")
+        except Exception as e:
+            print(e)
+
+    def getBookingInfo(self, userID):
+        self.cursor.execute("""SELECT * FROM bookings WHERE userID = ?""", (userID,))
+
+        rows = self.cursor.fetchall()
+
+        bookings = []
+        for row in rows:
+            bookings.append({
+                "bookingID": row[0],
+                "userID": row[1],
+                "tourDatetime": row[2],
+                "adults": row[3],
+                "children": row[4],
+                "hotel": row[5],
+                "rooms": row[6],
+                "nights": row[7]
+            })
+
+        return bookings
     
     def hashPassword(self, password): 
         return bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt()) 
