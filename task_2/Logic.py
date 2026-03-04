@@ -22,29 +22,32 @@ class Backend(QObject):
             self.currentUser = self.db.getUserDetails(email)
             self.currentUserID = self.currentUser["userID"]
             self.userChanged.emit()
+            self.bookingsChanged.emit()
             return True
         return False
     
-    @Slot(int, str, int, int, int, int, int)
-    def addBooking(self, userID, tourDatetime, adults, children, hotel, rooms, nights):
+    @Slot(str, int, int, int, int, int)
+    def addBooking(self, tourDatetime, adults, children, hotel, rooms, nights):
         try:
-            print("ADDING BOOKING:", userID, tourDatetime, adults, children, hotel, rooms, nights)
-            self.db.addNewBooking(userID, tourDatetime, adults, children, hotel, rooms, nights)
+            print("ADDING BOOKING:", self.currentUserID, tourDatetime, adults, children, hotel, rooms, nights)
+            self.db.addNewBooking(self.currentUserID, tourDatetime, adults, children, hotel, rooms, nights)
             self.bookingsChanged.emit()
         except Exception as e:
             print(e)
 
-    @Slot(result='QVariant')
-    def getBookingInfo(self):
+    @Property('QVariant', notify=bookingsChanged)
+    def bookings(self):
         if not self.currentUser:
             return []
-
+        print()
+        print(self.db.getBookingInfo(self.currentUserID))
         return self.db.getBookingInfo(self.currentUserID)
 
     @Slot()
     def logOut(self):
         self.currentUser = None
         self.userChanged.emit()
+        self.bookingsChanged.emit()
     
     @Property(str, notify=userChanged)
     def username(self):

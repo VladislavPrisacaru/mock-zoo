@@ -185,7 +185,7 @@ Item {
 
             console.log("attempting booking")
 
-            backend.addBooking(backend.currentUserID, isoString, parseInt(adults.currentText), parseInt(children.currentText), hotelChecked, parseInt(numRooms.currentText), parseInt(numNights.currentText))
+            backend.addBooking(isoString, parseInt(adults.currentText), parseInt(children.currentText), hotelChecked, parseInt(numRooms.currentText), parseInt(numNights.currentText))
             console.log("booking succesfull")
             goHome()
         }

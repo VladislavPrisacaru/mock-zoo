@@ -25,42 +25,44 @@ Item {
 
             Material.roundedScale: Material.NotRounded
 
-            ColumnLayout {
+            RowLayout {
+                ColumnLayout {
 
-                //Layout.fillWidth: true
-                spacing: 15
+                    //Layout.fillWidth: true
+                    spacing: 15
 
-                Label { text: "Profile"; font.pixelSize: 13 * uiScale }
+                    Label { text: "Profile"; font.pixelSize: 13 * uiScale }
 
-                Label { text: "username: " + backend.username; font.pixelSize: 13 * uiScale }
-                Label { text: "email: " + backend.email; font.pixelSize: 13 * uiScale }
-
-                Component.onCompleted: {
-                    console.log("BOOKINGS:", JSON.stringify(backend.getBookingInfo()))
-                }
-
-                ListView {
-                    width: parent.width
-                    height: 200
-                    Connections {
-                        target: backend
-                        function onBookingsChanged() {
-                            model = backend.getBookingInfo()
+                    Label { text: "username: " + backend.username; font.pixelSize: 13 * uiScale }
+                    Label { text: "email: " + backend.email; font.pixelSize: 13 * uiScale }
+            
+                    UI.AppButton {
+                        btnText: "Log Out"
+                        onClicked: {
+                            backend.logOut()
+                            goHome()
                         }
                     }
-
-                    delegate: Text {
-                        text: tourDatetime + " | Adults: " + adults + " | Children: " + children + " | Hotel: " + hotel + " | Rooms: " + rooms + " | Nights: " + nights
-                    }
                 }
 
+                ColumnLayout {
 
+                    UI.FormFrame{
+                        width: prefferedWidth
+                        ListView {
+                            width: parent.width
+                            height: 200
+                            model: backend.bookings
 
-                UI.AppButton {
-                    btnText: "Log Out"
-                    onClicked: {
-                        backend.logOut()
-                        goHome()
+                            delegate: Text {
+                                text: modelData.tourDatetime + 
+                                    " | Adults: " + modelData.adults +
+                                    " | Children: " + modelData.children +
+                                    " | Hotel: " + modelData.hotel +
+                                    " | Rooms: " + modelData.rooms +
+                                    " | Nights: " + modelData.nights
+                            }
+                        }
                     }
                 }
             }

@@ -100,6 +100,7 @@ class DatabaseManager:
                 "nights": row[7]
             })
 
+        print("returning bookings to the UI")
         return bookings
     
     def hashPassword(self, password): 
