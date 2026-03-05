@@ -8,7 +8,7 @@ from Logic import Backend
 
 app = QApplication(sys.argv)
 engine = QQmlApplicationEngine()
-QQuickStyle.setStyle("Material") 
+QQuickStyle.setStyle("Material") # set the inbuild style
 
 # connect db 
 db = db("AppDB.db")

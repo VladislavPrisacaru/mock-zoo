@@ -1,3 +1,5 @@
+// InputForm.qml
+
 import QtQuick 
 import QtQuick.Controls 
 import QtQuick.Layouts 
@@ -6,7 +8,7 @@ RowLayout {
                 
     spacing: 10
 
-    property alias labelText: label.text
+    property alias labelText: label.text // access to the label and text
     property alias inputText: textField.text
     property bool isPassword: false
 

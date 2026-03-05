@@ -7,6 +7,7 @@ import "Components" as UI
 
 Item { 
 
+    // navigation functions
     signal goToRegister()
     signal goToLogin()
     signal goToProfile()

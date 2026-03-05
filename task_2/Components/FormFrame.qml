@@ -8,7 +8,6 @@ import QtQuick.Controls.Material
 
 ColumnLayout {
     id: root
-    //anchors.centerIn: parent
 
     default property alias content: innerColumn.children
 
@@ -16,14 +15,14 @@ ColumnLayout {
 
         Layout.fillWidth: true
 
-        Material.elevation: 3
+        Material.elevation: 3 // styling
         padding: 30
         topPadding: 30
         bottomPadding: 30
         Material.roundedScale: Material.LargeScale
 
 
-        ColumnLayout {
+        ColumnLayout {  // usable layout by the child
             id: innerColumn
 
             Layout.fillWidth: true
