@@ -47,21 +47,20 @@ Item {
 
                 ColumnLayout {
 
-                    UI.FormFrame{
-                        width: prefferedWidth
-                        ListView {
-                            width: parent.width
-                            height: 200
-                            model: backend.bookings
+                    width: prefferedWidth
+                    ListView {
+                        width: parent.width
+                        height: 200
+                        model: backend.bookings
 
-                            delegate: Text {
-                                text: modelData.tourDatetime + 
-                                    " | Adults: " + modelData.adults +
-                                    " | Children: " + modelData.children +
-                                    " | Hotel: " + modelData.hotel +
-                                    " | Rooms: " + modelData.rooms +
-                                    " | Nights: " + modelData.nights
-                            }
+                        delegate: Text {
+                            text: modelData.tourDatetime + 
+                                " | Adults: " + modelData.adults +
+                                " | Children: " + modelData.children +
+                                " | Hotel: " + modelData.hotel +
+                                " | Rooms: " + modelData.rooms +
+                                " | Nights: " + modelData.nights
+                            font.pixelSize: 13 * uiScale
                         }
                     }
                 }

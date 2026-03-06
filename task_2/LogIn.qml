@@ -84,6 +84,5 @@ Item {
     function clearFields() {
         emailRow.inputText = "" 
         passwordRow.inputText = ""
-    }
-    
+    } 
 }
