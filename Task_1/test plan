@@ -1,0 +1,119 @@
+Date of 
+test 
+Component to be tested Type of test to 
+be carried out 
+Prerequisites and dependencies 
+- When signing up 
+entering an invalid 
+password will result in an 
+error 
+Black box testing Access to the website 
+Computer 
+Incorrect password 
+- When signing up 
+entering an invalid 
+username will result in 
+an error 
+Black box testing Access to the website 
+Computer 
+Incorrect username 
+- When signing up 
+entering if the confirmed 
+password field does not 
+match the password it 
+will result in an error 
+Black box testing Access to the website 
+Computer 
+Incorrect confirm password input 
+- When signing up 
+entering an invalid email 
+will result in an error 
+Black box testing Access to the website 
+Computer 
+Incorrect email 
+- When logging in if the 
+username and password 
+are correct the user will 
+be redirected to the 
+home page 
+White box 
+testing 
+Access to the website 
+Computer 
+Correct username: ‘Test123’ 
+Correct password ‘admin’ 
+- When a button linking to 
+a different page in the 
+dashboard is clicked the 
+user will be redirected to 
+that page 
+Black box testing Access to the website 
+Computer 
+Clicking a button that links to a different 
+page in the dashboard 
+- When the user clicks 
+“sign out” they’ll be 
+redirected to the login 
+page and have to sign in 
+again to access the main 
+website 
+White box 
+testing 
+Access to the website 
+Computer 
+Already signed in on an account 
+Clicking on the “sign out” button 
+- When a user clicks on 
+the weather widget on 
+the home page they’ll be 
+redirected to the 
+weather forecast page 
+for more information 
+White box 
+testing 
+Access to the website 
+Computer 
+Already signed in on an account 
+Clicking on the weather widget 
+Occupational Specialism Task 1 – Design documents
+- When a user clicks on 
+the air quality widget on 
+the home page they’ll be 
+redirected to the air 
+quality page for more 
+information 
+White box 
+testing 
+Access to the website 
+Computer 
+Already signed in on an account 
+Clicking on the air quality widget 
+- When a user clicks on 
+the overall health widget 
+on the home page they’ll 
+be redirected to the 
+White box 
+testing 
+Access to the website 
+Computer 
+Already signed in on an account 
+Clicking on the overall health widget 
+personal health page for 
+more information 
+- When a user creates their 
+account they’ll receive an 
+email confirming it was 
+them 
+White box testing Access to the internet 
+Access to the website 
+Computer 
+Creating an account 
+- The user will be able to 
+input their ailments on 
+the personal health page 
+and it will have an effect 
+on the overall health risk 
+for the user 
+Black box testing Access to the website 
+Computer 
+Clicking the buttons on the personal health 
